@@ -1,3 +1,17 @@
+//**************************** TCP Echo Server Application ******************************
+//  Copyright (c) 2021 Trenser
+//  All Rights Reserved
+//*****************************************************************************
+//
+// File       :client.c
+// Summary    :client code for echo server application
+// Note       :server code will be in server.c
+// Author     :Mimi C.S
+// Date       :13/01/2026
+//
+//*****************************************************************************
+
+//******************************* Include Files ******************************
 #include <stdio.h>
 #include <string.h>
 #include <unistd.h>
@@ -5,8 +19,15 @@
 
 #define PORT 8080
 #define BUF_SIZE 1024
-
-int main() {
+//******************************.main.c.****************************** 
+//Purpose :client application code
+//Inputs  :data from server
+//Outputs :data to server
+//Return  :
+//Notes   :
+//********************************************************************************** 
+int main() 
+{
     int sock_fd;
     struct sockaddr_in server_addr;
     char buffer[BUF_SIZE];
@@ -16,7 +37,7 @@ int main() {
     if (sock_fd < 0)
     {
         perror("Socket failed");
-        return 1;
+        return -1;
     }
 
     // 2. Server address
@@ -28,7 +49,7 @@ int main() {
     if (connect(sock_fd, (struct sockaddr *)&server_addr, sizeof(server_addr)) < 0)
     {
         perror("Connect failed");
-        return 1;
+        return -1;
     }
 
     printf("Connected to server\n");

@@ -1,3 +1,17 @@
+//**************************** TCP Server Client timeout Application ******************************
+//  Copyright (c) 2021 Trenser
+//  All Rights Reserved
+//*****************************************************************************
+//
+// File       :client_timeout.c
+// Summary    :Application code for TCP client
+// Note       :server code will be in server_timeout.c
+// Author     :Mimi C.S
+// Date       :13/01/2026
+//
+//*****************************************************************************
+
+//******************************* Include Files *******************************
 #include <stdio.h>
 #include <string.h>
 #include <unistd.h>
@@ -11,6 +25,13 @@ int make_non_blocking(int fd)
     int flags = fcntl(fd, F_GETFL, 0);
     return fcntl(fd, F_SETFL, flags | O_NONBLOCK);
 }
+//******************************.main.******************************
+//Purpose :Application code for client with timeout
+//Inputs  :Receive data from server
+//Outputs :Sent data to server
+//Return  :
+//Notes   :server application code will be in server_timeout.c
+//**********************************************************************************
 int main()
 {
     int sock;
@@ -38,7 +59,7 @@ int main()
     fd_set readfds;
     FD_ZERO(&readfds);
     FD_SET(sock, &readfds);
-    timeout.tv_sec = 5; // receive timeout
+    timeout.tv_sec = 5;
     timeout.tv_usec = 0;
     activity = select(sock + 1, &readfds, NULL, NULL, &timeout);
     if (activity == 0)
